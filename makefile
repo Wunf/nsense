@@ -1,10 +1,13 @@
-test : nsscene.o nsrec.o test.o
-	g++ -o test nsscene.o nsrec.o test.o
+TESTMODS = nsscene.o nsrec.o test.o
+
+test : $(TESTMODS)
+	g++ -o $@ $^
+
 test.o : src/test.c
-	g++ -g -c src/test.c
-nsrec.o : src/nsrec.cpp src/nsrec.h
-	g++ -g -c src/nsrec.cpp
-nsscene.o : src/nsscene.cpp src/nsscene.h
-	g++ -g -c src/nsscene.cpp
+	g++ -g -c $^
+nsrec.o : src/nsrec.cpp
+	g++ -g -c $^
+nsscene.o : src/nsscene.cpp
+	g++ -g -c $^
 clean:
 	rm *.o test
