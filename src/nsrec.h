@@ -7,12 +7,9 @@ class NSRec : public NSItem
 {
 public:
 	NSRec(){}
-	NSRec(int l, int t, int w, int h) : left(l), top(t), width(w), height(h) {}
+	NSRec(int l, int t, int w, int h) : NSItem(l, t, w, h) {}
 	~NSRec(){}
 	void Render();
-
-private:
-	int left, top, width, height;
 };
 
 #endif

@@ -28,6 +28,7 @@ private:
 	int width, height;
 	char * frameBuf;
 	std::vector<NSItem*> items;
+	void ClearBuf();
 };
 
 #endif
