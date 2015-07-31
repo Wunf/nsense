@@ -5,29 +5,23 @@
 #include <vector>
 
 class NSItem;
+class NSComponent;
 
 class NSScene : public NSObject
 {
 public:
-	NSScene(){}
 	NSScene(int w, int h);
-	virtual ~NSScene() { delete[] frameBuf; }
+	virtual ~NSScene();
 	inline int Width() { return width; }
 	inline int Height() { return height; }
-	void AddItem(NSItem * item);
+	void AddItem(int l, int t, NSItem * item);
 	void Flush();
 	void Render();
-	int SetBuffer(int x, int y, char c) 
-	{
-		if(x > width || y >= height) return -1;
-		frameBuf[(width + 1) * y + x] = c;
-		return 0;
-	}
 
 private:
 	int width, height;
 	char * frameBuf;
-	std::vector<NSItem*> items;
+	std::vector<NSComponent*> components;
 	void ClearBuf();
 };
 

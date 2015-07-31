@@ -3,32 +3,23 @@
 
 #include "nsobject.h"
 
-extern "C" {
-#include <lua.h>
-}
-
-class NSScene;
-
 class NSItem : public NSObject
 {
 public:
-	NSItem() : L(NULL) {}
-	NSItem(int l, int t, int w, int h) : left(l), top(t), width(w), height(h), L(NULL) {}
+	NSItem(int w, int h) : width(w), height(h) { buffer = new char[width * height]; }
 	virtual ~NSItem(){}
-	void SetScene(NSScene * s) { scene = s; }
 	virtual void Render(){}
-	void MoveUp(int s);
-	void DoScript(const char * f);
+	int GetWidth() { return width; }
+	int GetHeight() { return height; }
+	char* GetBuffer() { return buffer; }
 
 protected:
-	NSScene * scene;
-	int left, top, width, height;
-
-private:
-	lua_State * L;
-	int InitScript();
+	int width, height;
+	char * buffer;
+	inline void SetBuffer(int x, int y, char c)
+	{
+		buffer[y * width + x] = c;
+	}
 };
-
-int mvup(lua_State * L);
 
 #endif

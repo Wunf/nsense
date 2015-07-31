@@ -6,10 +6,9 @@
 class NSRec : public NSItem
 {
 public:
-	NSRec(){}
-	NSRec(int l, int t, int w, int h) : NSItem(l, t, w, h) {}
-	~NSRec(){}
-	void Render();
+	NSRec(int w, int h) : NSItem(w, h) {}
+	virtual ~NSRec(){}
+	virtual void Render();
 };
 
 #endif

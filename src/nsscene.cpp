@@ -1,5 +1,6 @@
 #include "nsscene.h"
 #include "nsitem.h"
+#include "nscomponent.h"
 #include <stdio.h>
 #include <memory.h>
 #include <stdlib.h>
@@ -10,11 +11,21 @@ NSScene::NSScene(int w, int h) : width(w), height(h)
 	ClearBuf();
 }
 
+NSScene::~NSScene()
+{
+	delete[] frameBuf;
+	for(int i = 0; i < components.size(); ++i)
+	{
+		delete components[i];
+	}
+	components.clear();
+}
+
 void NSScene::ClearBuf()
 {
 	memset(frameBuf, ' ', (width + 1) * height);
-	for(int i = 0; i < height; ++i) SetBuffer(width, i, '\n'); 
-	frameBuf[(width + 1) * height + 1] = '\0';
+	for(int i = 0; i < height; ++i) frameBuf[i * (width + 1) + width] = '\n';
+	frameBuf[(width + 1) * height] = '\0';
 }
 
 void NSScene::Flush()
@@ -24,17 +35,17 @@ void NSScene::Flush()
 	fflush(stdout);
 }
 
-void NSScene::AddItem(NSItem * item)
+void NSScene::AddItem(int l, int t, NSItem * item)
 {
-	items.push_back(item);
-	item->SetScene(this);
+	components.push_back(new NSComponent(item, l, t));
+	components.back()->SetScene(this);
 }
 
 void NSScene::Render()
 {
 	ClearBuf();
-	for(std::vector<NSItem*>::iterator iter = items.begin(); iter != items.end(); ++iter)
+	for(std::vector<NSComponent*>::iterator iter = components.begin(); iter != components.end(); ++iter)
 	{
-		(*iter)->Render();
+		(*iter)->Render(frameBuf, width, height);
 	}
 }
