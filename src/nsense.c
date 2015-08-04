@@ -3,35 +3,35 @@ extern "C" {
 #include <lualib.h>
 #include <lauxlib.h>
 
-void nsmakescenecpp(int w, int h);
-void nsmakereccpp(int w, int h);
-void nsadd2scenecpp(int n, int l, int t);
-void nsruncpp(void);
+void nsmakescenecwapper(int w, int h);
+void nsmakereccwapper(int w, int h);
+void nsadd2scenecwapper(int n, int l, int t);
+void nsruncwapper(void);
 
 static int nsmakescene(lua_State * L)
 {
 	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 2);
-	nsmakescenecpp(w, h);
+	nsmakescenecwapper(w, h);
 	return 0;
 }
 
 static int nsmakerec(lua_State * L)
 {
 	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 1);
-	nsmakereccpp(w, h);
+	nsmakereccwapper(w, h);
 	return 0;
 }
 
 static int nsadd2scene(lua_State * L)
 {
 	int n = luaL_checkinteger(L, 1), l = luaL_checkinteger(L, 1), t = luaL_checkinteger(L, 1);
-	nsadd2scenecpp(n, l, t);
+	nsadd2scenecwapper(n, l, t);
 	return 0;
 }
 
 static int nsrun(lua_State * L)
 {
-	nsruncpp();
+	nsruncwapper();
 }
 
 int luaopen_nsense(lua_State * L)

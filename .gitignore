@@ -1,4 +1,6 @@
 *.o
+*.so
 test
 *.swp
 *.gch
+test/

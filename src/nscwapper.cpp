@@ -8,25 +8,25 @@
 static std::vector<NSScene*> scenes;
 static NSItem * curItem;
 
-void nsmakescenecpp(int w, int h)
+void nsmakescenecwapper(int w, int h)
 {
 	NSScene * s = new NSScene(w, h);
 	scenes.push_back(s);
 }
 
-void nsmakereccpp(int w, int h)
+void nsmakereccwapper(int w, int h)
 {
 	NSRec * r = new NSRec(w, h);
 	curItem = r;
 }
 
-void nsadd2scenecpp(int n, int l, int t)
+void nsadd2scenecwapper(int n, int l, int t)
 {
 	if(n > scenes.size()) return;
 	scenes[n - 1]->AddItem(l, t, curItem);
 }
 
-void nsruncpp(void)
+void nsruncwapper(void)
 {
 	int n = 0;
 	NSScene * s = scenes[n];
