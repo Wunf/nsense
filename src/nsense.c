@@ -17,14 +17,14 @@ static int nsmakescene(lua_State * L)
 
 static int nsmakerec(lua_State * L)
 {
-	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 1);
+	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 2);
 	nsmakereccwapper(w, h);
 	return 0;
 }
 
 static int nsadd2scene(lua_State * L)
 {
-	int n = luaL_checkinteger(L, 1), l = luaL_checkinteger(L, 1), t = luaL_checkinteger(L, 1);
+	int n = luaL_checkinteger(L, 1), l = luaL_checkinteger(L, 2), t = luaL_checkinteger(L, 3);
 	nsadd2scenecwapper(n, l, t);
 	return 0;
 }

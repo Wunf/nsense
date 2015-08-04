@@ -47,7 +47,7 @@ void NSComponent::Render(char * b, int bw, int bh)
 	{
 		for(int j = 0; j < h; ++j)
 		{	
-			int x = left + i, y = top + j;	
+			int x = left + i - 1, y = top + j - 1;	
 			b[y * (bw + 1) + x] = ib[j * w + i];
 		}
 	}	
