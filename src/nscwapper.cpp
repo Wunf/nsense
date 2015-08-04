@@ -36,7 +36,7 @@ void nsruncpp(void)
 		{
 			s->Render();
 			s->Flush();
-			sleep(0.5);
+			sleep(5);
 		}
 		else
 		{
