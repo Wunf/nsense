@@ -15,8 +15,10 @@ public:
 	inline int Width() { return width; }
 	inline int Height() { return height; }
 	void AddItem(int l, int t, NSItem * item);
+	void AddScript(const char * s);
 	void Flush();
 	void Render();
+	void DoScript();
 
 private:
 	int width, height;

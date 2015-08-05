@@ -13,7 +13,6 @@ NSComponent::~NSComponent()
 int NSComponent::InitScript()
 {
 	L = luaL_newstate(); 
-	//luaL_openlibs(L);
 
 	int swidth = scene->Width();
 	lua_pushnumber(L, swidth);
@@ -26,16 +25,21 @@ int NSComponent::InitScript()
 	lua_register(L, "Moveup", mvup);
 }
 
-void NSComponent::DoScript(const char * f)
+void NSComponent::DoScript()
 {
 	if(!L) InitScript();	
 	curCom = this;
-	luaL_dofile(L, f);
+	luaL_dofile(L, script);
 }
 
 void NSComponent::MoveUp(int s)
 {
 	top -= s;
+}
+
+void NSComponent::AddScript(const char * s)
+{
+	script = s;
 }
 
 void NSComponent::Render(char * b, int bw, int bh)

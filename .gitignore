@@ -5,3 +5,4 @@ test
 *.gch
 test/
 test.lua
+foo.lua

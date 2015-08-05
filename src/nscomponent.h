@@ -14,7 +14,8 @@ public:
 	NSComponent(NSItem * i, int l, int t) : item(i), left(l), top(t), L(NULL) {}
 	~NSComponent();
 	void MoveUp(int s);
-	void DoScript(const char * f);
+	void AddScript(const char * s);
+	void DoScript();
 	void SetScene(NSScene * s) { scene = s; }
 	void Render(char * b, int bw, int bh);
 
@@ -24,6 +25,7 @@ private:
 	lua_State * L;
 	NSScene * scene;
 	int InitScript();
+	const char * script;
 };
 
 int mvup(lua_State * L);

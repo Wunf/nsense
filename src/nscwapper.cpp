@@ -26,6 +26,11 @@ void nsadd2scenecwapper(int n, int l, int t)
 	scenes[n - 1]->AddItem(l, t, curItem);
 }
 
+void nsaddscriptcwapper(const char * s)
+{
+	scenes.back()->AddScript(s);
+}
+
 void nsruncwapper(void)
 {
 	int n = 0;
@@ -36,7 +41,8 @@ void nsruncwapper(void)
 		{
 			s->Render();
 			s->Flush();
-			sleep(5);
+			s->DoScript();
+			sleep(2);
 		}
 		else
 		{

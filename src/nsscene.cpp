@@ -37,8 +37,14 @@ void NSScene::Flush()
 
 void NSScene::AddItem(int l, int t, NSItem * item)
 {
+	NSComponent * c = new NSComponent(item, l, t);
 	components.push_back(new NSComponent(item, l, t));
 	components.back()->SetScene(this);
+}
+
+void NSScene::AddScript(const char * s)
+{
+	components.back()->AddScript(s);
 }
 
 void NSScene::Render()
@@ -47,5 +53,13 @@ void NSScene::Render()
 	for(std::vector<NSComponent*>::iterator iter = components.begin(); iter != components.end(); ++iter)
 	{
 		(*iter)->Render(frameBuf, width, height);
+	}
+}
+
+void NSScene::DoScript()
+{
+	for(std::vector<NSComponent*>::iterator iter = components.begin(); iter != components.end(); ++iter)
+	{
+		(*iter)->DoScript();
 	}
 }
