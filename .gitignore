@@ -1,8 +1,6 @@
 *.o
 *.so
-test
 *.swp
 *.gch
-test/
-test.lua
+test
 foo.lua
