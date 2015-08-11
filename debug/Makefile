@@ -1,5 +1,5 @@
 test : test.c
-	g++ -g -L.. $^ -o $@ -lnsense -llua
+	g++ -g $^ -o $@ -lnsense -llua5.2
 prepare : 
 	sudo cp ../nsense.so /usr/lib/libnsense.so
 clean:
