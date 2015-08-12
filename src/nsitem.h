@@ -6,12 +6,12 @@
 class NSItem : public NSObject
 {
 public:
-	NSItem(int w, int h) : width(w), height(h) { buffer = new char[width * height]; }
-	virtual ~NSItem(){}
+	NSItem(const char * n, int w, int h) : NSObject(n), width(w), height(h) { buffer = new char[width * height]; }
+	virtual ~NSItem(){delete[] buffer;}
 	virtual void Render(){}
-	int GetWidth() { return width; }
-	int GetHeight() { return height; }
-	char* GetBuffer() { return buffer; }
+	virtual int GetWidth() { return width; }
+	virtual int GetHeight() { return height; }
+	virtual char* GetBuffer() { return buffer; }
 
 protected:
 	int width, height;

@@ -1,11 +1,18 @@
 #include "nsscene.h"
 #include "nsitem.h"
 #include "nscomponent.h"
+#include "nsglobal.h"
 #include <stdio.h>
 #include <memory.h>
 #include <stdlib.h>
+extern "C"{
+#include <lua.h>
+#include <lauxlib.h>
+}
 
-NSScene::NSScene(int w, int h) : width(w), height(h)
+extern NSGlobal global;
+
+NSScene::NSScene(const char * n, int w, int h) : NSObject(n), width(w), height(h)
 { 
 	frameBuf = new char[(w + 1) * h + 1];
 	ClearBuf();
@@ -35,16 +42,28 @@ void NSScene::Flush()
 	fflush(stdout);
 }
 
-void NSScene::AddItem(int l, int t, NSItem * item)
+void NSScene::AddObject(NSObject * o, int l, int t)
 {
-	NSComponent * c = new NSComponent(item, l, t);
-	components.push_back(new NSComponent(item, l, t));
+	NSComponent * c = new NSComponent(o, l, t);
+	components.push_back(c);
 	components.back()->SetScene(this);
 }
 
-void NSScene::AddScript(const char * s)
+void NSScene::AddScript(lua_State * L, const char * s)
 {
-	components.back()->AddScript(s);
+	global.curobjname = name;
+	if(luaL_loadfile(L, s) || lua_pcall(L, 0, 0, 0))
+	{
+		printf("%s\n", lua_tostring(L, -1));
+		exit(0);
+		return;
+	}
+	lua_getglobal(L, name);	
+	if(!lua_istable(L, -1))
+		return;
+	lua_getfield(L, -1, "Init");
+	if(lua_pcall(L, 0, 0, 0) != LUA_OK)
+		return;
 }
 
 void NSScene::Render()
@@ -56,10 +75,3 @@ void NSScene::Render()
 	}
 }
 
-void NSScene::DoScript()
-{
-	for(std::vector<NSComponent*>::iterator iter = components.begin(); iter != components.end(); ++iter)
-	{
-		(*iter)->DoScript();
-	}
-}

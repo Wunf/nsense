@@ -4,54 +4,46 @@
 #include "nsscene.h"
 #include "nsitem.h"
 #include "nsrec.h"
+#include "nsglobal.h"
 
-static std::vector<NSScene*> scenes;
-static NSItem * curItem;
+extern NSGlobal global;
 
-void nsmakescenecwapper(int w, int h)
+void nsmakescenecwapper(const char * n, int w, int h)
 {
-	NSScene * s = new NSScene(w, h);
-	scenes.push_back(s);
+	NSScene * s = new NSScene(n, w, h);
+	global.AddObject(s);
 }
 
-void nsmakereccwapper(int w, int h)
+void nsmakereccwapper(const char * n, int w, int h)
 {
-	NSRec * r = new NSRec(w, h);
-	curItem = r;
+	NSRec * r = new NSRec(n, w, h);
+	global.AddObject(r);
 }
 
-void nsadd2scenecwapper(int n, int l, int t)
+void nsputcwapper(const char * n, int l, int t)
 {
-	if(n > scenes.size()) return;
-	scenes[n - 1]->AddItem(l, t, curItem);
+	NSObject * o = global.FindObjectByName(n);
+	NSObject * p = global.FindObjectByName(global.curobjname);
+	p->AddObject(o, l, t);
+	
 }
 
-void nsaddscriptcwapper(const char * s)
+void nsaddscriptcwapper(lua_State * L, const char * n, const char * s)
 {
-	scenes.back()->AddScript(s);
+	NSObject * o = global.FindObjectByName(n);
+	o->AddScript(L, s);
 }
 
-void nsruncwapper(void)
+void nsruncwapper(const char * n)
 {
-	int n = 0;
-	NSScene * s = scenes[n];
+	NSScene * s = dynamic_cast<NSScene*>(global.FindObjectByName(n));
 	while(true)	
 	{
 		if(s)
 		{
 			s->Render();
 			s->Flush();
-			s->DoScript();
 			sleep(2);
 		}
-		else
-		{
-			s = scenes[++n];
-		}
 	}
-	for(int i = 0; i < scenes.size(); ++i)
-	{
-		delete scenes[i];
-	}
-	scenes.clear();
 }

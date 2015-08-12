@@ -1,4 +1,4 @@
-NSMODS = nsscene.o nscomponent.o nsrec.o nsense.o nscwapper.o
+NSMODS = nsscene.o nscomponent.o nsrec.o nsense.o nscwapper.o nsglobal.o
 COMPILER = g++
 
 nsense.so : $(NSMODS)
@@ -11,6 +11,8 @@ nscomponent.o : src/nscomponent.cpp
 nsscene.o : src/nsscene.cpp
 	$(COMPILER) -g -c -fPIC $^
 nscwapper.o : src/nscwapper.cpp
+	$(COMPILER) -g -c -fPIC $^
+nsglobal.o : src/nsglobal.cpp
 	$(COMPILER) -g -c -fPIC $^
 nsense.o : src/nsense.c
 	$(COMPILER) -g -c -fPIC $^

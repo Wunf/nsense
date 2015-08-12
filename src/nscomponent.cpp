@@ -1,45 +1,13 @@
 #include "nscomponent.h"
 #include "nsscene.h"
-#include "nsitem.h"
-extern "C" {
-#include <lauxlib.h>
-}
-
-NSComponent * curCom;
+#include "nsobject.h"
 
 NSComponent::~NSComponent()
 { delete item; }
 
-int NSComponent::InitScript()
-{
-	L = luaL_newstate(); 
-
-	int swidth = scene->Width();
-	lua_pushnumber(L, swidth);
-	lua_setglobal(L, "scenewid");
-
-	int sheight = scene->Height();
-	lua_pushnumber(L, sheight);
-	lua_setglobal(L, "scenehgt");
-	
-	lua_register(L, "Moveup", mvup);
-}
-
-void NSComponent::DoScript()
-{
-	if(!L) InitScript();	
-	curCom = this;
-	luaL_dofile(L, script);
-}
-
 void NSComponent::MoveUp(int s)
 {
 	top -= s;
-}
-
-void NSComponent::AddScript(const char * s)
-{
-	script = s;
 }
 
 void NSComponent::Render(char * b, int bw, int bh)
@@ -56,10 +24,4 @@ void NSComponent::Render(char * b, int bw, int bh)
 			b[y * (bw + 1) + x] = ib[j * w + i];
 		}
 	}	
-}
-
-int mvup(lua_State * L)
-{
-	int s = lua_tonumber(L, -1);
-	curCom->MoveUp(s);
 }

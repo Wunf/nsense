@@ -6,7 +6,7 @@
 class NSRec : public NSItem
 {
 public:
-	NSRec(int w, int h) : NSItem(w, h) {}
+	NSRec(const char * n, int w, int h) : NSItem(n, w, h) {}
 	virtual ~NSRec(){}
 	virtual void Render();
 };

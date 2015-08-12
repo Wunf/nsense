@@ -3,43 +3,48 @@ extern "C" {
 #include <lualib.h>
 #include <lauxlib.h>
 
-void nsmakescenecwapper(int w, int h);
-void nsmakereccwapper(int w, int h);
-void nsadd2scenecwapper(int n, int l, int t);
-void nsaddscriptcwapper(const char * s);
-void nsruncwapper(void);
+void nsmakescenecwapper(const char * n, int w, int h);
+void nsmakereccwapper(const char * n, int w, int h);
+void nsputcwapper(const char * n, int l, int t);
+void nsaddscriptcwapper(lua_State * L, const char * n, const char * s);
+void nsruncwapper(const char * n);
 
 static int nsmakescene(lua_State * L)
 {
-	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 2);
-	nsmakescenecwapper(w, h);
+	const char * n = luaL_checkstring(L, 1);
+	int w = luaL_checkinteger(L, 2), h = luaL_checkinteger(L, 3);
+	nsmakescenecwapper(n, w, h);
 	return 0;
 }
 
 static int nsmakerec(lua_State * L)
 {
-	int w = luaL_checkinteger(L, 1), h = luaL_checkinteger(L, 2);
-	nsmakereccwapper(w, h);
+	const char * n = luaL_checkstring(L, 1);	
+	int w = luaL_checkinteger(L, 2), h = luaL_checkinteger(L, 3);
+	nsmakereccwapper(n, w, h);
 	return 0;
 }
 
-static int nsadd2scene(lua_State * L)
+static int nsput(lua_State * L)
 {
-	int n = luaL_checkinteger(L, 1), l = luaL_checkinteger(L, 2), t = luaL_checkinteger(L, 3);
-	nsadd2scenecwapper(n, l, t);
+	const char * n = luaL_checkstring(L, 1);
+	int l = luaL_checkinteger(L, 2), t = luaL_checkinteger(L, 3);
+	nsputcwapper(n, l, t);
 	return 0;
 }
 
 static int nsaddscript(lua_State * L)
 {
-	const char * s = luaL_checkstring(L, 1);	
-	nsaddscriptcwapper(s);
+	const char * n = luaL_checkstring(L, 1);	
+	const char * s = luaL_checkstring(L, 2);	
+	nsaddscriptcwapper(L, n, s);
 	return 0;
 }
 
 static int nsrun(lua_State * L)
 {
-	nsruncwapper();
+	const char * n = luaL_checkstring(L, 1);	
+	nsruncwapper(n);
 }
 
 int luaopen_nsense(lua_State * L)
@@ -49,7 +54,7 @@ int luaopen_nsense(lua_State * L)
 		{ "run", nsrun },	
 		{ "makescene", nsmakescene },	
 		{ "makerec", nsmakerec },	
-		{ "add2scene", nsadd2scene },	
+		{ "put", nsput },	
 		{ "addscript", nsaddscript },	
 		{ NULL, NULL }	
 	};
