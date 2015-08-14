@@ -1,9 +1,11 @@
-NSMODS = nsscene.o nscomponent.o nsrec.o nsense.o nscwapper.o nsglobal.o
+NSMODS = nsobject.o nsscene.o nscomponent.o nsrec.o nsense.o nscwapper.o nsglobal.o
 COMPILER = g++
 
 nsense.so : $(NSMODS)
 	$(COMPILER) -g --shared -fPIC $^ -o $@ -llua5.2
 
+nsobject.o : src/nsobject.cpp
+	$(COMPILER) -g -c -fPIC $^
 nsrec.o : src/nsrec.cpp
 	$(COMPILER) -g -c -fPIC $^
 nscomponent.o : src/nscomponent.cpp

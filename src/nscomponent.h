@@ -11,13 +11,11 @@ public:
 	~NSComponent();
 	void MoveUp(int s);
 	void AddScript(const char * s);
-	void SetScene(NSScene * s) { scene = s; }
 	void Render(char * b, int bw, int bh);
 
 private:
 	NSObject * item;
 	int left, top;	
-	NSScene * scene;
 };
 
 #endif

@@ -1,5 +1,4 @@
 #include "nscomponent.h"
-#include "nsscene.h"
 #include "nsobject.h"
 
 NSComponent::~NSComponent()

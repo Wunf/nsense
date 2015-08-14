@@ -1,7 +1,6 @@
 #include "nsscene.h"
 #include "nsitem.h"
 #include "nscomponent.h"
-#include "nsglobal.h"
 #include <stdio.h>
 #include <memory.h>
 #include <stdlib.h>
@@ -10,7 +9,6 @@ extern "C"{
 #include <lauxlib.h>
 }
 
-extern NSGlobal global;
 
 NSScene::NSScene(const char * n, int w, int h) : NSObject(n), width(w), height(h)
 { 
@@ -40,30 +38,6 @@ void NSScene::Flush()
 	system("clear");
 	printf("%s", frameBuf);	
 	fflush(stdout);
-}
-
-void NSScene::AddObject(NSObject * o, int l, int t)
-{
-	NSComponent * c = new NSComponent(o, l, t);
-	components.push_back(c);
-	components.back()->SetScene(this);
-}
-
-void NSScene::AddScript(lua_State * L, const char * s)
-{
-	global.curobjname = name;
-	if(luaL_loadfile(L, s) || lua_pcall(L, 0, 0, 0))
-	{
-		printf("%s\n", lua_tostring(L, -1));
-		exit(0);
-		return;
-	}
-	lua_getglobal(L, name);	
-	if(!lua_istable(L, -1))
-		return;
-	lua_getfield(L, -1, "Init");
-	if(lua_pcall(L, 0, 0, 0) != LUA_OK)
-		return;
 }
 
 void NSScene::Render()

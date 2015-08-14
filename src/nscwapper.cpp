@@ -25,7 +25,6 @@ void nsputcwapper(const char * n, int l, int t)
 	NSObject * o = global.FindObjectByName(n);
 	NSObject * p = global.FindObjectByName(global.curobjname);
 	p->AddObject(o, l, t);
-	
 }
 
 void nsaddscriptcwapper(lua_State * L, const char * n, const char * s)
