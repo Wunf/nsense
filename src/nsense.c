@@ -7,7 +7,7 @@ void nsmakescenecwapper(const char * n, int w, int h);
 void nsmakereccwapper(const char * n, int w, int h);
 void nsputcwapper(const char * n, int l, int t);
 void nsaddscriptcwapper(lua_State * L, const char * n, const char * s);
-void nsruncwapper(const char * n);
+void nsruncwapper(lua_State * L, const char * n);
 
 static int nsmakescene(lua_State * L)
 {
@@ -44,7 +44,7 @@ static int nsaddscript(lua_State * L)
 static int nsrun(lua_State * L)
 {
 	const char * n = luaL_checkstring(L, 1);	
-	nsruncwapper(n);
+	nsruncwapper(L, n);
 }
 
 int luaopen_nsense(lua_State * L)

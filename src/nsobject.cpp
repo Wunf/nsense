@@ -7,6 +7,7 @@ extern NSGlobal global;
 
 void NSObject::AddScript(lua_State * L, const char * s){
 	global.curobjname = name;
+	script = s;
 	if(luaL_loadfile(L, s) || lua_pcall(L, 0, 0, 0))
 	{
 		printf("%s\n", lua_tostring(L, -1));
@@ -27,4 +28,27 @@ void NSObject::AddObject(NSObject * o, int l, int t)
 {
 	NSComponent * c = new NSComponent(o, l, t);
 	components.push_back(c);
+}
+
+void NSObject::Update(lua_State * L)
+{
+	global.curobjname = name;
+	if(luaL_loadfile(L, script) || lua_pcall(L, 0, 0, 0))
+	{
+		printf("%s\n", lua_tostring(L, -1));
+		exit(0);
+	}
+	lua_getglobal(L, name);	
+	if(!lua_istable(L, -1))
+		exit(0);
+	lua_getfield(L, -1, "Update");
+	if(lua_pcall(L, 0, 0, 0) != LUA_OK)
+	{
+		printf("%s\n", lua_tostring(L, -1));
+		exit(0);
+	}
+	for(std::vector<NSComponent*>::iterator iter = components.begin(); iter != components.end(); ++iter)
+	{
+		(*iter)->Update(L);
+	}	
 }

@@ -24,3 +24,8 @@ void NSComponent::Render(char * b, int bw, int bh)
 		}
 	}	
 }
+
+void NSComponent::Update(lua_State * L)
+{
+	item->Update(L);	
+}

@@ -22,10 +22,12 @@ public:
 	virtual int GetHeight(){}
 	virtual char * GetBuffer(){}
 	virtual void AddScript(lua_State * L, const char * s);
+	virtual void Update(lua_State * L);
 
 protected:
 	std::vector<NSComponent*> components;
 	const char * name;
+	const char * script;
 };
 
 #endif

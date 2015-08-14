@@ -33,7 +33,7 @@ void nsaddscriptcwapper(lua_State * L, const char * n, const char * s)
 	o->AddScript(L, s);
 }
 
-void nsruncwapper(const char * n)
+void nsruncwapper(lua_State * L, const char * n)
 {
 	NSScene * s = dynamic_cast<NSScene*>(global.FindObjectByName(n));
 	while(true)	
@@ -42,6 +42,7 @@ void nsruncwapper(const char * n)
 		{
 			s->Render();
 			s->Flush();
+			s->Update(L);
 			sleep(2);
 		}
 	}
