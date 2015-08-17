@@ -36,11 +36,6 @@ void NSObject::Update(lua_State * L)
 	if(script)
 	{
 		global.curobjname = name;
-		if(luaL_loadfile(L, script) || lua_pcall(L, 0, 0, 0))
-		{
-			printf("%s\n", lua_tostring(L, -1));
-			exit(0);
-		}
 		lua_getglobal(L, name);	
 		if(!lua_istable(L, -1))
 			exit(0);
