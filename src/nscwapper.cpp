@@ -47,3 +47,9 @@ void nsruncwapper(lua_State * L, const char * n)
 		}
 	}
 }
+
+void nsmoveupcwapper(const char * n, int s)
+{
+	NSComponent * c = global.FindComponentByName(n);
+	c->Moveup(s);
+}	

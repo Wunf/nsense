@@ -6,4 +6,5 @@ scene1.Init = function()
 end
 
 scene1.Update = function()
+	nsense.moveup("r1", 1)
 end

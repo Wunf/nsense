@@ -1,10 +1,12 @@
 #include "nscomponent.h"
 #include "nsobject.h"
 
+NSComponent::NSComponent(NSObject * o, int l, int t) : item(o), left(l), top(t), name(o->Name()) {}
+
 NSComponent::~NSComponent()
 { delete item; }
 
-void NSComponent::MoveUp(int s)
+void NSComponent::Moveup(int s)
 {
 	top -= s;
 }

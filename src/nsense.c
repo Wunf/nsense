@@ -8,6 +8,7 @@ void nsmakereccwapper(const char * n, int w, int h);
 void nsputcwapper(const char * n, int l, int t);
 void nsaddscriptcwapper(lua_State * L, const char * n, const char * s);
 void nsruncwapper(lua_State * L, const char * n);
+void nsmoveupcwapper(const char * n, int s);
 
 static int nsmakescene(lua_State * L)
 {
@@ -47,6 +48,13 @@ static int nsrun(lua_State * L)
 	nsruncwapper(L, n);
 }
 
+static int nsmoveup(lua_State * L)
+{
+	const char * n = luaL_checkstring(L, 1);	
+	int s = luaL_checkinteger(L, 2);
+	nsmoveupcwapper(n, s);
+}
+
 int luaopen_nsense(lua_State * L)
 {
 	luaL_checkversion(L);
@@ -56,6 +64,7 @@ int luaopen_nsense(lua_State * L)
 		{ "makerec", nsmakerec },	
 		{ "put", nsput },	
 		{ "addscript", nsaddscript },	
+		{ "moveup", nsmoveup },	
 		{ NULL, NULL }	
 	};
 	luaL_newlib(L, l);
