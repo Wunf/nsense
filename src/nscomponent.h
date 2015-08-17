@@ -4,7 +4,6 @@
 extern "C" {
 #include <lua.h>
 }
-class NSScene;
 class NSObject;
 
 class NSComponent

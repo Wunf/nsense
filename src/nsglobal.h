@@ -12,6 +12,7 @@ class NSGlobal
 public:
 	NSGlobal(){ }
 	void AddObject(NSObject * o) { objects.push_back(o); }
+	void AddComponent(NSComponent * c) { components.push_back(c); }
 	NSObject* FindObjectByName(const char * n); 
 	NSComponent* FindComponentByName(const char * n); 
 	const char * curobjname;

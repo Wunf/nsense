@@ -2,9 +2,6 @@
 #define __NSSCENE_H__
 
 #include "nsobject.h"
-extern "C" {
-#include <lua.h>
-}
 
 class NSItem;
 

@@ -12,7 +12,7 @@ class NSComponent;
 class NSObject
 {
 public:
-	NSObject(const char * n) : name(n){}
+	NSObject(const char * n) : name(n), script(NULL) {}
 	virtual ~NSObject(){}
 	virtual const char * Name(){ return name; }
 	virtual void AddScript(){}
