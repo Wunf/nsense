@@ -11,6 +11,17 @@ void NSComponent::Moveup(int s)
 	top -= s;
 }
 
+void NSComponent::Movedown(int s)
+{
+	top += s;
+}
+
+void NSComponent::Position(int &l, int &t)
+{
+	t = top; 
+	l = left;
+}
+
 void NSComponent::Render(char * b, int bw, int bh)
 {
 	item->Render();

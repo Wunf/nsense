@@ -10,5 +10,7 @@ extern "C" void nsputcwapper(const char * n, int l, int t);
 extern "C" void nsaddscriptcwapper(lua_State * L, const char * n, const char * s);
 extern "C" void nsruncwapper(lua_State * L, const char * n);
 extern "C" void nsmoveupcwapper(const char * n, int s);
+extern "C" void nsmovedowncwapper(const char * n, int s);
+extern "C" void nspositioncwapper(const char * n, int &l, int &t);
 
 #endif

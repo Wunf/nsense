@@ -53,3 +53,15 @@ void nsmoveupcwapper(const char * n, int s)
 	NSComponent * c = global.FindComponentByName(n);
 	c->Moveup(s);
 }	
+
+void nsmovedowncwapper(const char * n, int s)
+{
+	NSComponent * c = global.FindComponentByName(n);
+	c->Movedown(s);
+}	
+
+void nspositioncwapper(const char * n, int &l, int &t)
+{
+	NSComponent * c = global.FindComponentByName(n);
+	c->Position(l, t);
+}
