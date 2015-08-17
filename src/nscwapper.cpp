@@ -43,7 +43,7 @@ void nsruncwapper(lua_State * L, const char * n)
 			s->Render();
 			s->Flush();
 			s->Update(L);
-			sleep(2);
+			sleep(1);
 		}
 	}
 }

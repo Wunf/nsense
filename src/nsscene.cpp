@@ -29,7 +29,7 @@ NSScene::~NSScene()
 
 void NSScene::ClearBuf()
 {
-	memset(frameBuf, '*', (width + 1) * height);
+	memset(frameBuf, ' ', (width + 1) * height);
 	for(int i = 0; i < height; ++i) frameBuf[i * (width + 1) + width] = '\n';
 	frameBuf[(width + 1) * height] = '\0';
 }

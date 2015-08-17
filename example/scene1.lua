@@ -12,7 +12,7 @@ scene1.Update = function()
 	if r1top == 1 then
 		up = false
 	end
-	if r1top + 5 == scene1height then
+	if r1top + 4 == scene1height then
 		up = true
 	end
 	if up then
