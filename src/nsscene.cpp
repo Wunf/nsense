@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include <stdlib.h>
+#include <string>
 extern "C"{
 #include <lua.h>
 #include <lauxlib.h>
@@ -49,3 +50,15 @@ void NSScene::Render()
 	}
 }
 
+void NSScene::AddScript(lua_State * L, const char * s)
+{
+	NSObject::AddScript(L, s);
+	std::string str = name;
+	str += "width";
+	lua_pushinteger(L, width);
+	lua_setglobal(L, str.c_str());
+	str = name;
+	str += "height";
+	lua_pushinteger(L, height);
+	lua_setglobal(L, str.c_str());
+}

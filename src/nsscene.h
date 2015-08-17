@@ -14,6 +14,7 @@ public:
 	inline int Height() { return height; }
 	void Flush();
 	void Render();
+	virtual void AddScript(lua_State * L, const char * s);
 
 private:
 	int width, height;
