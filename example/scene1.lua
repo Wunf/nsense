@@ -3,7 +3,7 @@ scene1 = {}
 local up = true
 
 scene1.Init = function()
-	nsense.makerec("r1", 4, 5)
+	nsense.makerec("r1", 40, 5)
 	nsense.put("r1", 3, 4)
 end
 
