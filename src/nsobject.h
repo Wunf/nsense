@@ -30,4 +30,14 @@ protected:
 	const char * script;
 };
 
+namespace NS
+{
+	class Object
+	{
+	public:
+		Object() {}
+		virtual ~Object() {}
+	};
+}
+
 #endif

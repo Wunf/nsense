@@ -25,4 +25,23 @@ private:
 	int left, top;	
 };
 
+namespace NS
+{
+	class Component
+	{
+	public:
+		Component() {}
+		virtual ~Component() {}
+	};
+
+	class ScriptCom : public Component
+	{
+	public:
+		ScriptCom() {}
+		virtual ~ScriptCom() {}
+		void AddScript(const char * script) {}
+	};
+
+}
+
 #endif
