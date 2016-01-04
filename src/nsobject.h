@@ -6,6 +6,8 @@ extern "C" {
 #include <lauxlib.h>
 }
 #include <vector>
+#include <string>
+using namespace std;
 
 class NSComponent;
 
@@ -38,10 +40,10 @@ namespace NS
 		Object() {}
 		Object(const char * n) : name(n) {}
 		virtual ~Object() {}
-		const char * Name(){ return name; }
+		const char * Name(){ return name.c_str(); }
 
 	private:
-		const char * name;
+		string name;
 	};
 }
 

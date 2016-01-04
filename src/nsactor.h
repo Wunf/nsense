@@ -6,23 +6,25 @@
 #include <map>
 #include <string>
 
+using namespace std;
+
 namespace NS
 {
 	class Component;
-	using namespace std;
 
 	class Actor : public Object
 	{
 	public:
 		Actor() {}
 		virtual ~Actor() {}
-		void AddComponent(const char * type);
+		void AddComponent(const char * type, const char * name);
+		Component * FindComponentByName(const char * name);
 
 	protected:
 		vector<Component*> coms;	
 
 	private:
-		map<string, vector<unsigned int> > typemap;
+		map<string, unsigned int> namemap;
 	};
 }
 

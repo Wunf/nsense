@@ -4,6 +4,11 @@
 extern "C" {
 #include <lua.h>
 }
+#include <string>
+#include "nsobject.h"
+using namespace std;
+
+
 class NSObject;
 
 class NSComponent
@@ -27,25 +32,35 @@ private:
 
 namespace NS
 {
-	class Component
+	class Component : public Object
 	{
 	public:
-		Component() {}
+		Component(const char * n) : Object(n) {}
 		virtual ~Component() {}
 	};
 
 	class TranslateCom : public Component
 	{
 	public:
-		TranslateCom(int xx, int yy) : x(xx), y(yy), scaleX(1.0f), scaleY(1.0f) {}
+		TranslateCom(const char * n) : Component(n), x(0), y(0), scaleX(1.0f), scaleY(1.0f) {}
 		int x, y;
 		float scaleX, scaleY;
+	};
+
+	class ShapeCom : public Component
+	{
+	public:
+		ShapeCom(const char * n); 
+		void FromStrings(const char ** shape, size_t ln);
+
+	private:
+		string shapeStr;
 	};
 
 	class ScriptCom : public Component
 	{
 	public:
-		ScriptCom() {}
+		ScriptCom(const char * n) : Component(n) {}
 		virtual ~ScriptCom() {}
 		void AddScript(const char * script) {}
 	};

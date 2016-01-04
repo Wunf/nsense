@@ -1,5 +1,7 @@
 #include "nscomponent.h"
 #include "nsobject.h"
+#include <iostream>
+using namespace std;
 
 NSComponent::NSComponent(NSObject * o, int l, int t) : item(o), left(l), top(t), name(o->Name()) {}
 
@@ -41,4 +43,18 @@ void NSComponent::Render(char * b, int bw, int bh)
 void NSComponent::Update(lua_State * L)
 {
 	item->Update(L);	
+}
+
+namespace NS
+{
+	ShapeCom::ShapeCom(const char * n) : Component(n) {}
+
+	void ShapeCom::FromStrings(const char ** shape, size_t ln)
+	{
+		for(unsigned int i = 0; i < ln; ++i)		
+		{
+			shapeStr += string(shape[i]);	
+		}
+		cout << shapeStr << endl;
+	}
 }
