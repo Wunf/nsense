@@ -3,19 +3,26 @@
 
 #include "nsobject.h"
 #include <vector>
+#include <map>
+#include <string>
 
 namespace NS
 {
 	class Component;
+	using namespace std;
 
 	class Actor : public Object
 	{
 	public:
 		Actor() {}
 		virtual ~Actor() {}
+		void AddComponent(const char * type);
 
 	protected:
-		std::vector<Component*> coms;	
+		vector<Component*> coms;	
+
+	private:
+		map<string, vector<unsigned int> > typemap;
 	};
 }
 

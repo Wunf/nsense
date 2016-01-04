@@ -20,7 +20,11 @@ nsglobal.o : src/nsglobal.cpp
 	$(COMPILER) -g -c -fPIC $^
 nsense.o : src/nsense.c
 	$(COMPILER) -g -c -fPIC $^
+test.o : src/test.cpp
+	$(COMPILER) -g -c -fPIC $^
 install :
 	sudo cp nsense.so /usr/lib/libnsense.so
+test : test.o
+	$(COMPILER) -g -fPIC $^ -o $@ -Lnsense.so
 clean:
 	rm *.o test nsense.so

@@ -34,6 +34,14 @@ namespace NS
 		virtual ~Component() {}
 	};
 
+	class TranslateCom : public Component
+	{
+	public:
+		TranslateCom(int xx, int yy) : x(xx), y(yy), scaleX(1.0f), scaleY(1.0f) {}
+		int x, y;
+		float scaleX, scaleY;
+	};
+
 	class ScriptCom : public Component
 	{
 	public:

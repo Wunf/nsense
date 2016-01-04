@@ -36,7 +36,12 @@ namespace NS
 	{
 	public:
 		Object() {}
+		Object(const char * n) : name(n) {}
 		virtual ~Object() {}
+		const char * Name(){ return name; }
+
+	private:
+		const char * name;
 	};
 }
 
